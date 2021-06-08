@@ -1,0 +1,10 @@
+def guide(figure):
+    d_new = figure.direction
+
+    while True:
+        p_new = figure.move_pos(d_new)
+        if figure.check_pos(p_new):
+            return d_new
+        d_new = figure.turn_left(d_new)
+
+
