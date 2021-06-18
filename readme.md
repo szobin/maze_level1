@@ -2,6 +2,12 @@
 
 ## Python lessons by Sergey Zobin <http://zobin.org>
 
+### Tasks
+
+1) Estimate which of the variants of a very simple algorithm for choosing the direction for a player's piece on each move will lead to the target point of a simple maze and how efficiently
+2) Write your own algorithm for choosing the direction for the player's figure and compare its effectiveness
+
+
 ### Simple solutions
 
 - Solution 1: Move forwarg until wall and turn right
