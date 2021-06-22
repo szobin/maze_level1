@@ -1,7 +1,7 @@
 import tkinter as tk
 import copy
 
-from .conf import COLS, ROWS, MX, MY, PX, PY, CH, MAZE_MAP, DS
+from .conf import COLS, ROWS, MX, MY, PX, PY, CH, MAZE_MAP, WALL_IMAGE
 from .helper import get_x, get_y, get_image
 
 
@@ -14,7 +14,9 @@ class Board:
         wall_image = get_image("./images/wall_82.png")
         space_image = get_image("./images/space_82.png")
         food_image = get_image("./images/food_82.png")
-        self.images = [wall_image, space_image, food_image]
+        logo_image = get_image("./images/logo_82.png")
+        self.e_logo_image = get_image("./images/logo_82e.png")
+        self.images = [wall_image, space_image, food_image, logo_image]
 
     def reset(self):
         self.board_map = copy.deepcopy(MAZE_MAP)
@@ -47,16 +49,21 @@ class Board:
 
     def draw_game_over_panel(self, info):
         self.canvas.create_rectangle(get_x(COLS // 2 - 3), get_y(ROWS // 2 - 2),
-                                     get_x(COLS // 2 + 4), get_y(ROWS // 2 + 2), fill='red', tag="game_over")
+                                     get_x(COLS // 2 + 4), get_y(ROWS // 2 + 2),
+                                     fill='white', outline="black", width=3, tag="game_over")
         tx = get_x(COLS) // 2 + 10
         ty = get_y(ROWS) // 2 - CH
-        self.canvas.create_text(tx, ty, text="GAME OVER!", anchor=tk.CENTER, fill="white",
-                                font=('Tahoma', 40), tag="game_over")
+        self.canvas.create_text(tx, ty, text="GAME OVER!", anchor=tk.CENTER, fill="red",
+                                font=('Tahoma', 40, "bold"), tag="game_over")
 
         tx = get_x(COLS) // 2 + 10
         ty = get_y(ROWS) // 2
-        self.canvas.create_text(tx, ty, text=info, anchor=tk.CENTER, fill="yellow",
-                                font=('Tahoma', 30), tag="game_over")
+        self.canvas.create_text(tx, ty, text=info, anchor=tk.CENTER, fill="black",
+                                font=('Tahoma', 26, "bold"), tag="game_over")
+
+        x = get_x(COLS // 2 + 4) - 3
+        y = get_y(ROWS // 2 + 2) - 3
+        self.canvas.create_image(x, y, image=self.e_logo_image, anchor=tk.SE, tag="game_over")
 
     def set_cell(self, pos, cell):
         x, y = pos
@@ -74,4 +81,3 @@ class Board:
         if (sender is not None) and (self.check_func is not None):
             return self.check_func(sender, pos)
         return self.get_cell(pos) > 0
-

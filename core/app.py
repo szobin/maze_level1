@@ -50,7 +50,8 @@ class App:
 
     def game_over(self):
         self.board.draw_game_over_panel(f"Steps: {self.player.step_count}")
-        restart_button = tk.Button(self.window, text="RESTART", fg="red", width=24, height=2,
+        restart_button = tk.Button(self.window, text="RESTART", fg="white", bg="lawn green", font=("Tahoma", 24),
+                                   width=12, height=1,
                                    command=lambda: self.restart_var.set(1))
         restart_button.place(anchor=tk.CENTER, relx=0.5, rely=0.62)
         restart_button.wait_variable(self.restart_var)
