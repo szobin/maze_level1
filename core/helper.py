@@ -1,4 +1,4 @@
-import os
+import os, random
 from PIL import Image, ImageTk
 
 from core.conf import CW, CH, MX, MY, PX, PY, COLS, ROWS, RIGHT, LEFT, UP, DOWN
@@ -41,3 +41,6 @@ def get_image(fn, transparent=False):
     img = Image.open(fn).convert("RGBA")
     return ImageTk.PhotoImage(img) if not transparent else to_transparent_image(img)
 
+
+def reset_random():         
+   random.seed(1024)
